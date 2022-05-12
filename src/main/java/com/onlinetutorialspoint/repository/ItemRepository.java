@@ -19,10 +19,9 @@ public class ItemRepository {
     /**
      * Getting all Items from table
      * */
-    public List<Item> getAllItems(){
-        return template.query("select id, name,category from item",
-                (result,rowNum)->new Item(result.getInt("id"),
-                result.getString("name"),result.getString("category")));
+     public List<Item> getAllItems(){
+        return template.query("select id, name,category from item",BeanPropertyRowMapper
+                .newInstance(Item.class));
     }
     /**
      * Getting all Items Name from table
