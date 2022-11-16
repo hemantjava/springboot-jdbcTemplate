@@ -27,18 +27,14 @@ public class ItemRepository {
      * Getting all Items Name from table
      * */
     public List<String> getAllItemsNames(){
-        return template.query("select name from item", (resultSet,rowNum)->{
-            return resultSet.getString("name");
-        });
+        return template.query("select name from item", (resultSet,rowNum)-> resultSet.getString("name"));
     }
     /**
      * Getting a specific item by item id from table
      * */
     public Item getItem(int itemId){
         String query = "SELECT * FROM ITEM WHERE ID=?";
-        Item item = template.queryForObject(query,new Object[]{itemId},new BeanPropertyRowMapper<>(Item.class));
-
-        return item;
+        return template.queryForObject(query,new Object[]{itemId},new BeanPropertyRowMapper<>(Item.class));
     }
     /**
      * Adding an item into database table
